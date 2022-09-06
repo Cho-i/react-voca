@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import dummy from '../db/data.json'
 
-export default function DayList() {
+function DayList() {
 	return (
 		<ul className="list_day">
 			{
@@ -14,3 +14,5 @@ export default function DayList() {
 		</ul>
 	)
 }
+
+export default DayList;
