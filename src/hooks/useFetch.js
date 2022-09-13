@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-//custom Hooks
+//Custom Hooks
 function useFetch(url) {
   const [data, setData] = useState([]);
 
