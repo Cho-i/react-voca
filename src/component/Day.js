@@ -1,26 +1,33 @@
-import dummy from "../db/data.json";
+//import dummy from "../db/data.json";
+//import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
+import Word from "./Word";
 
 function Day() {
   const { day } = useParams();
-  const wordList = dummy.words.filter((word) => word.day === Number(day));
+  const words = useFetch(`http://localhost:3001/words?day=${day}`);
 
-  // 프로퍼티 키를 기준으로 디스트럭처링 할당이 이루어진다. 순서는 의미가 없다.
-  // 변수 lastName, firstName가 선언되고 obj(initializer(초기화자))가 Destructuring(비구조화, 파괴)되어 할당된다.
-  const obj = { firstName: "Ungmo", lastName: "Lee" };
-  const { lastName, firstName } = obj;
-  console.log(firstName, lastName);
+  //const wordList = dummy.words.filter((word) => word.day === Number(day));
+  // const [words, setWords] = useState([]);
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:3001/words?day=${day}`)
+  //     .then(res => {
+  //       return res.json();
+  //     })
+  //     .then(data => {
+  //       setWords(data);
+  //     });
+  // }, [day]);
 
   return (
     <>
       <h2>Day {day}</h2>
       <table>
         <tbody>
-          {wordList.map((word) => (
-            <tr key={word.id}>
-              <td>{word.eng}</td>
-              <td>{word.kor}</td>
-            </tr>
+          {words.map((word) => (
+            <Word word={word} key={word.id} />
           ))}
         </tbody>
       </table>
