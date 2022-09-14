@@ -19,11 +19,11 @@
   ],
   "words": [
     {
-      "id": 1,
-      "day": 1,
-      "eng": "book",
-      "kor": "책",
-      "isDone": true
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{\"id\":1,\"day\":1,\"eng\":\"book\",\"kor\":\"책\",\"isDone\":false}",
+      "id": 1
     },
     {
       "id": 3,
@@ -89,11 +89,30 @@
       "id": 12
     },
     {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{\"day\":\"1\",\"eng\":\"apple\",\"kor\":\"사과\",\"isDone\":true,\"id\":13}",
+      "id": 13
+    },
+    {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "id": 14
+    },
+    {
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "id": 15
+    },
+    {
       "day": "1",
       "eng": "apple",
       "kor": "사과",
       "isDone": false,
-      "id": 13
+      "id": 16
     }
   ]
 }

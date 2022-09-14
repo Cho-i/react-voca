@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
 function CreateWord() {
   const days = useFetch("http://localhost:3001/days");
   const history = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   function onSubmit(e) {
     e.preventDefault();
@@ -13,23 +14,28 @@ function CreateWord() {
     // console.log(korRef.current.value)
     // console.log(dayRef.current.value)
 
-    fetch(`http://localhost:3001/words/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        day: dayRef.current.value,
-        eng: engRef.current.value,
-        kor: korRef.current.value,
-        isDone: false
+    if (!isLoading) {
+      setIsLoading(true);
+
+      fetch(`http://localhost:3001/words/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          day: dayRef.current.value,
+          eng: engRef.current.value,
+          kor: korRef.current.value,
+          isDone: false
+        })
+      }).then(res => {
+        if (res.ok) {
+          alert('완료!');
+          history(`/day/${dayRef.current.value}`);
+        }
       })
-    }).then(res => {
-      if (res.ok) {
-        alert('완료!');
-        history(`/day/${dayRef.current.value}`);
-      }
-    })
+    }
+
   }
 
   const engRef = useRef(null);
@@ -56,7 +62,9 @@ function CreateWord() {
           }
         </select>
       </div>
-      <button>저장</button>
+      <button style={{
+        opacity: isLoading ? 0.3 : 1
+      }}>{isLoading ? "Saving..." : "저장"}</button>
     </form>
   )
 }
